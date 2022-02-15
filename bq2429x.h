@@ -122,6 +122,7 @@ typedef enum
 int32_t bq2429x_input_voltage_limit_set(bq2429x_ctx_t *ctx, uint8_t val);
 int32_t bq2429x_input_current_limit_set(bq2429x_ctx_t *ctx, uint8_t val);
 int32_t bq2429x_charge_enable(bq2429x_ctx_t *ctx, bool val);
+int32_t bq2429x_watchdog_reset(bq2429x_ctx_t *ctx, bool val);
 int32_t bq2429x_minimum_system_voltage_set(bq2429x_ctx_t *ctx, uint8_t val);
 int32_t bq2429x_boost_current_limit_set(bq2429x_ctx_t *ctx, uint8_t val);
 int32_t bq2429x_charge_current_set(bq2429x_ctx_t *ctx, uint8_t val);
@@ -129,6 +130,7 @@ int32_t bq2429X_precharge_current_set(bq2429x_ctx_t *ctx, uint8_t val);
 int32_t bq2429x_termination_current_set(bq2429x_ctx_t *ctx, uint8_t val);
 int32_t bq2429x_charge_voltage_set(bq2429x_ctx_t *ctx, uint8_t val);
 int32_t bq2429x_batt_low_threshold_set(bq2429x_ctx_t *ctx, uint8_t val);
+int32_t bq2429x_recharge_voltage_set(bq2429x_ctx_t *ctx, uint8_t val);
 int32_t bq2429x_termination_enable(bq2429x_ctx_t *ctx, bool val);
 int32_t bq2429x_watchdog_timer_set(bq2429x_ctx_t *ctx, uint8_t val);
 int32_t bq2429x_safety_timer_enable(bq2429x_ctx_t *ctx, bool val);

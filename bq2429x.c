@@ -56,6 +56,20 @@ int32_t bq2429x_charge_enable(bq2429x_ctx_t *ctx, bool val)
     return ret;
 }
 
+int32_t bq2429x_watchdog_reset(bq2429x_ctx_t *ctx, bool val)
+{
+    bq2429x_power_on_cfg_t power_on_cfg = {0};
+    int32_t ret;
+
+    ret = bq2429x_read_reg(ctx, BQ2429X_CONFIG_REG, (uint8_t *)&power_on_cfg, 1);
+    if (ret == 0)
+    {
+        power_on_cfg.wdg_reset = val;
+        ret = bq2429x_write_reg(ctx, BQ2429X_CONFIG_REG, (uint8_t *)&power_on_cfg, 1);
+    }
+    return ret;
+}
+
 int32_t bq2429x_minimum_system_voltage_set(bq2429x_ctx_t *ctx, uint8_t val)
 {
     bq2429x_power_on_cfg_t power_on_cfg = {0};
@@ -148,6 +162,20 @@ int32_t bq2429x_batt_low_threshold_set(bq2429x_ctx_t *ctx, uint8_t val)
     if (ret == 0)
     {
         chg_voltage_ctrl.batlowv = val;
+        ret = bq2429x_write_reg(ctx, BQ2429X_VREG_CTRL_REG, (uint8_t *)&chg_voltage_ctrl, 1);
+    }
+    return ret;
+}
+
+int32_t bq2429x_recharge_voltage_set(bq2429x_ctx_t *ctx, uint8_t val)
+{
+    bq2429x_chg_voltage_ctrl_t chg_voltage_ctrl = {0};
+    int ret;
+
+    ret = bq2429x_read_reg(ctx, BQ2429X_VREG_CTRL_REG, (uint8_t *)&chg_voltage_ctrl, 1);
+    if (ret == 0)
+    {
+        chg_voltage_ctrl.vrechg = val;
         ret = bq2429x_write_reg(ctx, BQ2429X_VREG_CTRL_REG, (uint8_t *)&chg_voltage_ctrl, 1);
     }
     return ret;
