@@ -6,9 +6,9 @@ extern "C" {
 #endif
 
 #include <math.h>
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
-#include <stdbool.h>
 
 typedef int32_t (*bq2429x_write_ptr)(void *, uint8_t, const uint8_t *, uint16_t);
 typedef int32_t (*bq2429x_read_ptr)(void *, uint8_t, uint8_t *, uint16_t);
@@ -81,7 +81,8 @@ typedef struct {
 } bq2429x_boostv_thermal_ctrl_t;
 
 typedef struct {
-    uint8_t int_mask       : 2;
+    uint8_t int_mask0      : 1;
+    uint8_t int_mask1      : 1;
     uint8_t res            : 3;
     uint8_t batfet_disable : 1;
     uint8_t tmr2x_en       : 1;
@@ -135,6 +136,9 @@ int32_t bq2429x_charge_timer_set(bq2429x_ctx_t *ctx, uint8_t val);
 int32_t bq2429x_boost_voltage_set(bq2429x_ctx_t *ctx, uint8_t val);
 int32_t bq2429x_boost_temp_monitor_set(bq2429x_ctx_t *ctx, uint8_t val);
 int32_t bq2429x_thermal_regulation_threshold_set(bq2429x_ctx_t *ctx, uint8_t val);
+int32_t bq2429x_batt_fault_interrupt_enable(bq2429x_ctx_t *ctx, uint8_t val);
+int32_t bq2429x_chg_fault_interrupt_enable(bq2429x_ctx_t *ctx, uint8_t val);
+
 int32_t bq2429x_system_status_get(bq2429x_ctx_t *ctx, bq2429x_sys_stat_t *sys_stat);
 int32_t bq2429x_fault_status_get(bq2429x_ctx_t *ctx, bq2429x_fault_stat_t *fault_stat);
 int32_t bq2429x_part_number_get(bq2429x_ctx_t *ctx, bq2429x_part_number_t *pn);

@@ -257,6 +257,34 @@ int32_t bq2429x_thermal_regulation_threshold_set(bq2429x_ctx_t *ctx, uint8_t val
     return ret;
 }
 
+int32_t bq2429x_batt_fault_interrupt_enable(bq2429x_ctx_t *ctx, uint8_t val)
+{
+    bq2429x_misc_ctrl_t misc_ctrl = {0};
+    int ret;
+
+    ret = bq2429x_read_reg(ctx, BQ2429x_MISC_CTRL_REG, (uint8_t *)&misc_ctrl, 1);
+    if (ret == 0)
+    {
+        misc_ctrl.int_mask0 = val;
+        ret = bq2429x_write_reg(ctx, BQ2429x_MISC_CTRL_REG, (uint8_t *)&misc_ctrl, 1);
+    }
+    return ret;
+}
+
+int32_t bq2429x_chg_fault_interrupt_enable(bq2429x_ctx_t *ctx, uint8_t val)
+{
+    bq2429x_misc_ctrl_t misc_ctrl = {0};
+    int ret;
+
+    ret = bq2429x_read_reg(ctx, BQ2429x_MISC_CTRL_REG, (uint8_t *)&misc_ctrl, 1);
+    if (ret == 0)
+    {
+        misc_ctrl.int_mask1 = val;
+        ret = bq2429x_write_reg(ctx, BQ2429x_MISC_CTRL_REG, (uint8_t *)&misc_ctrl, 1);
+    }
+    return ret;
+}
+
 int32_t bq2429x_system_status_get(bq2429x_ctx_t *ctx, bq2429x_sys_stat_t *sys_stat)
 {
     int ret;
