@@ -55,14 +55,14 @@ typedef struct {
 } bq2429x_chg_current_ctrl_t;
 
 typedef struct {
-    uint8_t iprechg : 4;
     uint8_t iterm   : 4;
+    uint8_t iprechg : 4;
 } bq2429x_pre_chg_term_current_ctrl_t;
 
 typedef struct {
-    uint8_t vreg    : 6;
-    uint8_t batlowv : 1;
     uint8_t vrechg  : 1;
+    uint8_t batlowv : 1;
+    uint8_t vreg    : 6;
 } bq2429x_chg_voltage_ctrl_t;
 
 typedef struct {
@@ -112,7 +112,6 @@ typedef struct {
     uint8_t             : 2;
     uint8_t part_number : 3;
 } bq2429x_vendor_stat_t;
-
 
 typedef enum
 {
