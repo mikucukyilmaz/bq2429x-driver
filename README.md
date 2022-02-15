@@ -28,24 +28,35 @@ bq2429x_part_number_t part_number;
 bq2429x_part_number_get(&bq2429x_ctx, &part_number);
 if (part_number == BQ24296 || part_number == BQ24297)
 {
-    bq2429x_input_voltage_limit_set(&bq2429x_ctx, 8);
+    bq2429x_input_voltage_limit_set(&bq2429x_ctx, 15);
     bq2429x_input_current_limit_set(&bq2429x_ctx, 7);
     bq2429x_charge_enable(&bq2429x_ctx, true);
     bq2429x_minimum_system_voltage_set(&bq2429x_ctx, 0);
     bq2429x_boost_current_limit_set(&bq2429x_ctx, 1);
     bq2429x_charge_current_set(&bq2429x_ctx, 39);
     bq2429X_precharge_current_set(&bq2429x_ctx, 7);
-    bq2429x_termination_current_set(&bq2429x_ctx, 1);
+    bq2429x_termination_current_set(&bq2429x_ctx, 2);
     bq2429x_charge_voltage_set(&bq2429x_ctx, 44);
     bq2429x_batt_low_threshold_set(&bq2429x_ctx, 0);
+    bq2429x_recharge_voltage_set(&bq2429x_ctx, 1);
     bq2429x_termination_enable(&bq2429x_ctx, true);
-    bq2429x_watchdog_timer_set(&bq2429x_ctx, 3);
+    bq2429x_watchdog_timer_set(&bq2429x_ctx, 0);
     bq2429x_safety_timer_enable(&bq2429x_ctx, true);
     bq2429x_charge_timer_set(&bq2429x_ctx, 3);
-    bq2429x_boost_voltage_set(&bq2429x_ctx, 0);
+    bq2429x_boost_voltage_set(&bq2429x_ctx, 7);
     bq2429x_boost_temp_monitor_set(&bq2429x_ctx, 3);
     bq2429x_thermal_regulation_threshold_set(&bq2429x_ctx, 3);
-    SEGGER_RTT_printf(0, "Charger[%d] Init Completed.", part_number);
+    bq2429x_batt_fault_interrupt_enable(&bq2429x_ctx, 0);
+    bq2429x_chg_fault_interrupt_enable(&bq2429x_ctx, 0);
 }
 ```
-
+CE pin can be used to restart charging on fault condition.
+```
+void charger_restart(void)
+{
+    HAL_GPIO_WritePin(BQ_CE_GPIO_Port, BQ_CE_Pin, GPIO_PIN_SET);
+    osDelay(250);
+    HAL_GPIO_WritePin(BQ_CE_GPIO_Port, BQ_CE_Pin, GPIO_PIN_RESET);
+}
+```
+That's all!
