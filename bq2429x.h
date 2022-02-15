@@ -113,6 +113,7 @@ typedef struct {
     uint8_t part_number : 3;
 } bq2429x_vendor_stat_t;
 
+
 typedef enum
 {
     BQ24296 = 1,
@@ -122,7 +123,7 @@ typedef enum
 int32_t bq2429x_input_voltage_limit_set(bq2429x_ctx_t *ctx, uint8_t val);
 int32_t bq2429x_input_current_limit_set(bq2429x_ctx_t *ctx, uint8_t val);
 int32_t bq2429x_charge_enable(bq2429x_ctx_t *ctx, bool val);
-int32_t bq2429x_watchdog_reset(bq2429x_ctx_t *ctx, bool val);
+int32_t bq2429x_watchdog_reset(bq2429x_ctx_t *ctx);
 int32_t bq2429x_minimum_system_voltage_set(bq2429x_ctx_t *ctx, uint8_t val);
 int32_t bq2429x_boost_current_limit_set(bq2429x_ctx_t *ctx, uint8_t val);
 int32_t bq2429x_charge_current_set(bq2429x_ctx_t *ctx, uint8_t val);
