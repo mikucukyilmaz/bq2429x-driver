@@ -17,6 +17,7 @@ typedef struct {
     bq2429x_write_ptr write_reg;
     bq2429x_read_ptr read_reg;
     void *handle;
+    uint8_t is_init;
 } bq2429x_ctx_t;
 
 #define BQ2429X_I2C_ADD (0x6B << 1)
